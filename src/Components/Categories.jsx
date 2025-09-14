@@ -1,0 +1,28 @@
+import { use } from "react";
+import { NavLink } from "react-router-dom";
+
+const categoryPromise = fetch('/categories.json').then((res) => res.json())
+const Categories = () => {
+    const categories = use(categoryPromise);
+    console.log(categories);
+    return (
+        <div>
+            <h2 className="font-semibold text-[#403f3f] text-xl mb-3">All Category ({categories.length})</h2>
+            <div className="flex flex-col gap-2 mt-5">
+                {
+                    categories.map(category => (
+                        <NavLink
+                            to={`/category/${category.id}`}
+                            className="btn bg-base-100 border-none hover:bg-base-200 font-semibold text-accent"
+                            key={category.id}
+                        >
+                            {category.name}
+                        </NavLink>
+                    ))
+                }
+            </div>
+        </div>
+    );
+};
+
+export default Categories;

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import userIcon from '../assets/user.png';
 const Navbar = () => {
     return (
-        <div className="flex justify-between">
+        <div className="flex justify-between my-2">
             <div className=""></div>
             <div className="nav space-x-5 items-center text-accent">
                 <NavLink to={'/'}>Home</NavLink>
