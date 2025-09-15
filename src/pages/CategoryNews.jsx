@@ -1,12 +1,12 @@
-import { fi } from "date-fns/locale";
 import { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import NewsCard from "../Components/NewsCard";
 
 const CategoryNews = () => {
     const { id } = useParams();
     const data = useLoaderData();
     const [categoryNews, setCategoryNews] = useState([]);
-    
+
     useEffect(() => {
         if (id == '0') {
             setCategoryNews(data);
@@ -22,7 +22,13 @@ const CategoryNews = () => {
     }, [data, id])
     return (
         <div>
-{categoryNews.length}
+            <h2 className="font-bold md-5">Dragon News Home </h2>
+            <h2 className="font-bold md-5">Total <span className="text-secondary">{categoryNews.length} </span> news found</h2>
+            <div className="grid grid-cols-1 gap-7">
+                {
+                    categoryNews.map(news => <NewsCard key={news.id} news={news}></NewsCard>)
+                }
+            </div>
         </div>
     );
 };
