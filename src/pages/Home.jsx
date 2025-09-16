@@ -1,9 +1,8 @@
+import { Navigate } from "react-router-dom";
 
 const Home = () => {
     return (
-        <div>
-            home page
-        </div>
+        <Navigate to={'/category/1'}></Navigate>
     );
 };
 

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import userIcon from '../assets/user.png';
 const Navbar = () => {
     return (
@@ -11,7 +11,7 @@ const Navbar = () => {
             </div>
             <div className="login flex gap-2 items-center">
                 <img src={userIcon} alt="" />
-                <button className="btn btn-primary rounded-none px-10">Login</button>
+                <Link to={'/auth/login'} className="btn btn-primary rounded-none px-10">Login</Link>
             </div>
         </div>
     );
