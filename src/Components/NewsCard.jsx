@@ -4,9 +4,11 @@ import { CiShare2 } from "react-icons/ci";
 import { FaStar, FaEye } from "react-icons/fa";
 import { IoIosStarOutline, IoMdStar } from "react-icons/io";
 import Rating from "react-rating";
+import { Link } from "react-router-dom";
 
 const NewsCard = ({ news }) => {
     const {
+        id,
         title,
         author,
         image_url,
@@ -60,9 +62,9 @@ const NewsCard = ({ news }) => {
                     {details.length > 200 ? (
                         <>
                             {details.slice(0, 200)}...
-                            <span className="text-secondary font-semibold cursor-pointer hover:underline ">
+                            <Link to={`/news-details/${id}`} className="text-secondary font-semibold cursor-pointer hover:underline ">
                                 Read More
-                            </span>
+                            </Link>
                         </>
                     ) : (
                         details
