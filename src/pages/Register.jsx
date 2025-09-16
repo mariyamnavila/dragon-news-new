@@ -1,24 +1,42 @@
-import { use } from 'react';
-import { Link } from 'react-router-dom';
+import { use, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Register = () => {
-    const { createUser, setUser } = use(AuthContext)
+    const { createUser, setUser, updateUser } = use(AuthContext);
+    const [nameError, setNameError] = useState('');
+
+    const navigate = useNavigate()
+
     const handleRegister = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
+        if (name.length < 5) {
+            setNameError('Name should be more than 5 character');
+            return
+        } else {
+            setNameError('')
+        }
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name,photo);
+        // console.log(name, photo);
         createUser(email, password)
             .then((result) => {
                 const user = result.user;
-                setUser(user);
+                updateUser({ displayName: name, photoURL: photo })
+                    .then(() => {
+                        setUser({...user,displayName: name, photoURL: photo })
+                        navigate('/')
+                    })
+                    .catch((error) => {
+                        // console.log(error);
+                        setUser(user)
+                    })
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 alert(error.message)
             })
     }
@@ -37,6 +55,9 @@ const Register = () => {
                             placeholder="Enter your name"
                             required
                         />
+                        {
+                            nameError && <p className='text-xs text-error'>{nameError}</p>
+                        }
                         {/* photo url */}
                         <label className="label">Photo URL</label>
                         <input

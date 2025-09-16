@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 const categoryPromise = fetch('/categories.json').then((res) => res.json())
 const Categories = () => {
     const categories = use(categoryPromise);
-    // console.log(categories);
     return (
         <div>
             <h2 className="font-semibold text-[#403f3f] text-xl mb-3">All Category ({categories.length})</h2>
